@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %} 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edu Space - Online Courses</title>
+    
+</head>
+<body>
+    <header class="header">
+        <div class="navbar">
+            <div class="logo">
+                <img src="{% static 'img/5.png' %}" alt="EduKids Logo">
+            </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="{% url 'index' %}">Home</a></li>
+                    <li><a href="{% url 'courses' %}">Courses</a></li>
+                    <li><a href="{% url 'about' %}">About Us</a></li>
+                    <li><a href="{% url 'contactUs' %}">Contact</a></li>
+                    {% if user.is_authenticated %}
+                         <li><a href="{% url 'dashboard' %}">My Courses</a></li>
+                         <li><a href="{% url 'logout' %}">SignOut</a></li>
+                    {% else %}
+                         <li><a href="{% url 'login' %}">Login</a></li>
+                         <li><a href="{% url 'signup' %}">sign up</a></li> 
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </header>
+  <link rel="stylesheet" href="{% static 'css/courses.css'%}">
+
+
+
+  <section class="course-list">
+<!-- Course 1 -->
+  {% for item in courses %}
+      <div class="course-card">
+          <img src="{{ item.course.image.url }}" alt="Arts and Crafts">
+          <div class="course-content">
+              <h3>{{ item.course.name }}</h3>
+              <p>{{ item.course.description }}</p>
+              <a href="{% url 'course_details' item.course.id %}" class="btn">Read More</a>
+              {% if item.is_subscribed %}
+                <h5 style="color: rgb(122, 124, 122);">You are subscribed to this course</h5>
+              {% else %}
+                <h5>You are not subscribed to this course</h5>
+              {% endif %}
+          </div>
+      </div>
+  {% endfor %}
+
+
+<!--End course card-->
+
+
+    
+</section>
+
+    
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 EduAdventures. All rights reserved.</p>
+        </div>
+    </footer>
+    
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %} 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edu Space - Online Courses</title>
+    
+</head>
+<body>
+    <header class="header">
+        <div class="navbar">
+            <div class="logo">
+              </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="{% url 'index' %}">Home</a></li>
+                    <li><a href="{% url 'courses' %}">Courses</a></li>
+                    <li><a href="{% url 'about' %}">About Us</a></li>
+                    <li><a href="{% url 'contactUs' %}">Contact</a></li>
+                    {% if user.is_authenticated %}
+                         <li><a href="{% url 'logout' %}">SignOut</a></li>
+                    {% else %}
+                         <li><a href="{% url 'login' %}">Login</a></li>
+                         <li><a href="{% url 'signup' %}">sign up</a></li> 
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    {% block content %}
+    {% endblock %}
+
+    
+
+    <section id="about" class="about">
+        <div class="container">
+            <h2>About Us</h2>
+            <p>EduSpace is dedicated to making learning exciting and interactive for kids. Our mission is to inspire young minds through fun, engaging courses that spark curiosity and foster lifelong skills.</p>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <p>Have questions? Reach out to us at <a href="mailto:info@eduadventures.com">info@eduadventures.com</a></p>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 EduAdventures. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

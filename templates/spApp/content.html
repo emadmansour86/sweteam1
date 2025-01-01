@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %} 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edu Space - Online Courses</title>
+    <link href="{% static 'css/content.css' %}" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="navbar">
+            <div class="logo">
+                <img src="{% static 'img/5.png' %}" alt="EduKids Logo">
+              </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="{% url 'index' %}">Home</a></li>
+                    <li><a href="{% url 'courses' %}">Courses</a></li>
+                    <li><a href="{% url 'about' %}">About Us</a></li>
+                    <li><a href="{% url 'contactUs' %}">Contact</a></li>
+                    {% if user.is_authenticated %}
+                         <li><a href="{% url 'dashboard' %}">My Courses</a></li>
+                         <li><a href="{% url 'logout' %}">SignOut</a></li>
+                    {% else %}
+                         <li><a href="{% url 'login' %}">Login</a></li>
+                         <li><a href="{% url 'signup' %}">sign up</a></li> 
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+
+    <section class="course-content">
+        <div class="container">
+            <h2>{{ course.name }}</h2>
+            
+            {% for content in contents %}
+             <div class="module">
+                <h3>{{ content.title }}</h3>
+                <ul>
+                    <li>
+                        <h4>{{ content.description }}</h4>
+                        <video controls>
+                            <source src="{{ content.content_file.url }}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        
+                    </li>
+                    
+                </ul>
+             </div>
+            {% endfor %}
+            
+            
+        </div>
+
+          
+    </section>
+
+            <!-- Back Button -->
+            <div class="back-btn">
+                <a href="{% url 'dashboard' %}" class="btn">Dashboard</a>
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Edu Space Platform. All Rights Reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

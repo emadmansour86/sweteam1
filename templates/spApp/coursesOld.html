@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <div class="courses">
+    <h1>Our Courses</h1>
+    {% for course in courses %}
+      <div class="course-item">
+        <h3>{{ course.name }}</h3>
+        <p>{{ course.description }}</p>
+        <form action="{% url 'course_details' course.pk %}" method="get" style="display:inline;">
+          <button type="submit" class="btn btn-primary">View Details</button>
+        </form>
+        
+      </div>
+    {% endfor %}
+  </div>
+
+{% endblock %} 

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>    
+<body>
+    <header class="header">
+        <div class="navbar">
+            <div class="logo">                
+                <img src="{% static 'img/5.png' %}" alt="EduKids Logo">
+              </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="{% url 'index' %}">Home</a></li>
+                    <li><a href="{% url 'courses' %}">Courses</a></li>
+                    <li><a href="{% url 'about' %}">About Us</a></li>
+                    <li><a href="{% url 'contactUs' %}">Contact</a></li>
+                    {% if user.is_authenticated %}
+                         <li><a href="{% url 'logout' %}">SignOut</a></li>
+                    {% else %}
+                         <li><a href="{% url 'login' %}">Login</a></li>
+                         <li><a href="{% url 'signup' %}">sign up</a></li> 
+                    {% endif %}
+
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <section class="profile">
+        <div class="container">
+            <div class="user-details">
+                <div class="user-info">
+                    <h2>Welcome Ahmed</h2>         
+                </div>
+            </div>
+            
+            <div class="assigned-courses">
+                <h2>Your Courses</h2>
+            </div> 
+        </div>
+    </section>
+
+    <section class="course-list">
+    {% for course in courses %}
+    <div class="course-card">
+        <img src="{{course.image.url}}" alt="Arts and Crafts">
+        <div class="course-content">
+            <h3>{{ course.name }}</h3>
+            <p>{{ course.description }}</p>
+            <a href="{% url 'course_details' course.pk %}" class="btn">Read More</a>
+        </div>
+    </div>
+    {% endfor %}
+        
+    </section>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Edu Space Platform. All Rights Reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

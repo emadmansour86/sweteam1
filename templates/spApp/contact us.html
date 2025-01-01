@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %} 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edu Space - Online Courses</title>
+    
+</head>
+<body>
+    <header class="header">
+        <div class="navbar">
+            <div class="logo">
+                <img src="{% static 'img/5.png' %}" alt="EduKids Logo">
+            </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="{% url 'index' %}">Home</a></li>
+                    <li><a href="{% url 'courses' %}">Courses</a></li>
+                    <li><a href="{% url 'about' %}">About Us</a></li>
+                    <li><a href="{% url 'contactUs' %}">Contact</a></li>
+                    {% if user.is_authenticated %}
+                         <li><a href="{% url 'dashboard' %}">My Courses</a></li>
+                         <li><a href="{% url 'logout' %}">SignOut</a></li>
+                    {% else %}
+                         <li><a href="{% url 'login' %}">Login</a></li>
+                         <li><a href="{% url 'signup' %}">sign up</a></li> 
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </header>
+  <link rel="stylesheet" href="{% static 'css/contact.css'%}">
+
+
+
+  <section class="contact-info">
+    <div class="container">
+        <h2>Get in Touch</h2>
+        <p>We are always here to help you. Reach out to us using the information below:</p>
+        <div class="info-grid">
+            <div class="info-box">
+                <h3>Email</h3>
+                <p><a href="mailto:support@eduadventures.com">support@eduadventures.com</a></p>
+            </div>
+            <div class="info-box">
+                <h3>Phone</h3>
+                <p>+1 (555) 987-6543</p>
+            </div>
+            <div class="info-box">
+                <h3>Address</h3>
+                <p>123 Learning Lane, Knowledge City, EduLand</p>
+            </div>
+            <div class="info-box">
+                <h3>Business Hours</h3>
+                <p>Monday - Friday: 9 AM - 6 PM</p>
+                <p>Saturday: 10 AM - 4 PM</p>
+                <p>Sunday: Closed</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="container">
+        <p>&copy; 2024 EduAdventures. All rights reserved.</p>
+    </div>
+</footer>
+    
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

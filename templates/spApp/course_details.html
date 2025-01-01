@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %} 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edu Space - Online Courses</title>
+    
+</head>
+<body>
+    <header class="header">
+        <div class="navbar">
+            <div class="logo">
+              </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="{% url 'index' %}">Home</a></li>
+                    <li><a href="{% url 'courses' %}">Courses</a></li>
+                    <li><a href="{% url 'about' %}">About Us</a></li>
+                    <li><a href="{% url 'contactUs' %}">Contact</a></li>
+                    {% if user.is_authenticated %}
+                         <li><a href="{% url 'logout' %}">SignOut</a></li>
+                    {% else %}
+                         <li><a href="{% url 'login' %}">Login</a></li>
+                         <li><a href="{% url 'signup' %}">sign up</a></li> 
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </header>
+  <link rel="stylesheet" href="{% static 'css/details.css'%}">
+
+  
+<!-- Start Page Coding -->
+  <section class="course-details">
+    <div class="container">
+        <h1 class="course-title">{{ course.name }}</h1>
+        <!-- Course Brief -->
+        <div class="brief">
+            <h2>Course Overview</h2>
+            <p>
+                {{ course.overview }}
+            </p>
+        </div>
+
+        <!-- What You'll Learn -->
+        <div class="learning-outcomes">
+            <h2>What You'll Learn</h2>
+            <ul>
+                {% for line in course.content.splitlines %}
+                <li>{{ line }}</li>
+                 {% endfor %}
+            </ul>
+        </div>
+
+        <!-- Course Details -->
+        <div class="course-info">
+            <h2>Course Information</h2>
+            <ul>
+                <li><strong>Duration:</strong> {{ course.duration }}</li>
+                <li><strong>Instructor:</strong> {{ course.instructor }}</li>
+                <li><strong>Level:</strong> {{ course.level }}</li>
+            </ul>
+        </div>
+
+        <!-- Course Introduction Video -->
+        <div class="course-video">
+            <h2>Course Introduction</h2>
+            <video controls>
+                <source src="{{course.mediaFile.url}}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+
+        <!-- Back & enroll Buttons -->
+        <div class="back-btn">     
+            {% if is_subscribed %}
+                 <a href="{% url 'courses' %}" class="btn">Back to Courses</a>         
+            {% else %}
+                 <a href="{% url 'courses' %}" class="btn">Back to Courses</a>  
+                 <a href="{% url 'enroll_course' course.id %}" class="btn">Enroll Now</a> 
+            {% endif %}
+        </div>
+
+    </div>
+</section>
+
+<!-- End Page Coding -->
+
+  
+
+    
+<!-- Page Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 EduAdventures. All rights reserved.</p>
+        </div>
+    </footer>
+    
+</body>
+</html>

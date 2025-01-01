@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %} 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edu space - About Us</title>
+    <link rel="stylesheet" href="{% static 'css/about.css'%}">
+</head>
+<body>
+    <header class="header">
+        <div class="navbar">
+            <div class="logo">
+                <img src="{% static 'img/5.png' %}" alt="EduKids Logo">
+            </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="{% url 'index' %}">Home</a></li>
+                    <li><a href="{% url 'courses' %}">Courses</a></li>
+                    <li><a href="{% url 'about' %}">About Us</a></li>
+                    <li><a href="{% url 'contactUs' %}">Contact</a></li>
+                    {% if user.is_authenticated %}
+                         <li><a href="{% url 'dashboard' %}">My Courses</a></li>
+                         <li><a href="{% url 'logout' %}">SignOut</a></li>
+                    {% else %}
+                         <li><a href="{% url 'login' %}">Login</a></li>
+                         <li><a href="{% url 'signup' %}">sign up</a></li> 
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </header>
+  
+
+    <div class="about-container">
+        <h2>About Us</h2>
+        <p>Welcome to the E-Learning Platform! Our mission is to provide accessible, high-quality education to learners worldwide. Whether you're a student, a professional, or someone looking to develop new skills, we have something for everyone.</p>
+        <p>We believe that education is the key to personal and professional growth. That's why we offer a wide range of courses across various disciplines, designed and delivered by industry experts.</p>
+        <p>Our vision is to empower individuals to achieve their goals and make a positive impact in their communities. We strive to create a supportive, engaging learning environment for all our users.</p>
+        <p>Join us on this journey of learning and self-improvement. Together, we can make a difference!</p>
+    </div>
+    <footer>
+        <p>&copy; 2024 E-Learning Platform. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>
